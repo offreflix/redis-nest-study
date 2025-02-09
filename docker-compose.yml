@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  nest-app:
+    build: .
+    container_name: api
+    restart: always
+    ports:
+      - "3000:3000" 
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - .:/app
+    networks:
+      - reflix
+
+  redis:
+    image: redis:alpine
+    restart: always
+    container_name: redis
+    volumes:
+      - 'redis_data:/data'
+    ports:
+      - 6379:6379    
+    networks:
+      - reflix  
+
+networks:
+  reflix:
+    driver: bridge      
+
+volumes:
+  redis_data:
+    driver: local 

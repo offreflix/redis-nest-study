@@ -1,0 +1,17 @@
+meta {
+  name: setHello
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/reflix
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "value": "dev"
+  }
+}
